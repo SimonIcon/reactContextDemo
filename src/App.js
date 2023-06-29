@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import { AuthenticationContext } from "./contexts/AuthenticationContext";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 function App() {
+  const [userName, setUserName] = useState('')
+  const [dashboard, showDashboard] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-full h-[100vh]">
+      <AuthenticationContext.Provider value={{ userName, setUserName, showDashboard }}>
+        {
+          dashboard === false ? <Login /> :
+            <Dashboard />
+        }
+      </AuthenticationContext.Provider>
+
     </div>
   );
 }
