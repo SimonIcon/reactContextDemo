@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { AuthenticationContext } from "./contexts/AuthenticationContext";
-import Login from "./components/Login";
+
 import Dashboard from "./components/Dashboard";
+import { useContext } from "react";
+import { AuthenticationContext } from "./contexts/AuthenticationContext";
+import AuthPage from "./Pages/AuthPage";
 function App() {
-  const [userName, setUserName] = useState('')
-  const [dashboard, showDashboard] = useState(false)
+  const { dashboard } = useContext(AuthenticationContext)
   return (
     <div className="w-full h-[100vh]">
-      <AuthenticationContext.Provider value={{ userName, setUserName, showDashboard }}>
-        {
-          dashboard === false ? <Login /> :
-            <Dashboard />
-        }
-      </AuthenticationContext.Provider>
+
+      {
+        dashboard === false ? <AuthPage /> :
+          <Dashboard />
+      }
+
 
     </div>
   );
